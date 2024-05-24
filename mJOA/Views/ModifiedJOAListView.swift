@@ -10,12 +10,12 @@ import SwiftData
 
 struct ModifiedJOAListView: View {
     @Environment(\.modelContext) private var modelContext//Where is the model context, in the enviroment. Important. Think of it as in RAM that interfaces to the persistent data store.
-    @Query private var joaList: [ModifiedJOA] //This how you get the data out of swift data. It may look like an array, but its actually an ordered list.
+    @Query private var patient: Patient //This how you get the data out of swift data. It may look like an array, but its actually an ordered list.
     
     var body: some View {
         NavigationStack {
             List {
-                ForEach(joaList) { joa in
+                ForEach(patient.mJOA ?? [ModifiedJOA(patient: patient)]) { joa in
                     NavigationLink {
                         ModifiedJOAView(mJOA: joa)
                     } label: {
@@ -25,7 +25,7 @@ struct ModifiedJOAListView: View {
                         }
                     }
                 }.onDelete(perform: deleteItems)
-
+                
             }
             .navigationTitle("JOAs")
             .toolbar {
@@ -44,13 +44,18 @@ struct ModifiedJOAListView: View {
             modelContext.insert(newItem)
         }
     }
-
+    
     private func deleteItems(offsets: IndexSet) {
         withAnimation {
-            for index in offsets {
-                modelContext.delete(joaList[index])
+            
+            guard let patientList = patient.mJOA else {
+                for index in offsets {
+                    modelContext.delete(patientList[index])
+                }
             }
+            
         }
+        
     }
 }
 
