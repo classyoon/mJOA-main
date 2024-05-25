@@ -21,6 +21,7 @@
 		91EA5D632C003E4400FA5A55 /* models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91EA5D622C003E4400FA5A55 /* models.swift */; };
 		91EA5D662C003EF900FA5A55 /* ModifiedJOAListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91EA5D652C003EF900FA5A55 /* ModifiedJOAListView.swift */; };
 		CA01BD932C0149DD0075B9A9 /* JOAPatientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA01BD922C0149DD0075B9A9 /* JOAPatientView.swift */; };
+		CAC3063C2C0175E5009347C7 /* PatientListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC3063B2C0175E5009347C7 /* PatientListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,7 @@
 		91EA5D622C003E4400FA5A55 /* models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = models.swift; sourceTree = "<group>"; };
 		91EA5D652C003EF900FA5A55 /* ModifiedJOAListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifiedJOAListView.swift; sourceTree = "<group>"; };
 		CA01BD922C0149DD0075B9A9 /* JOAPatientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JOAPatientView.swift; sourceTree = "<group>"; };
+		CAC3063B2C0175E5009347C7 /* PatientListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,6 +162,7 @@
 				91EA5D5B2C003A9400FA5A55 /* ModifiedJOAView.swift */,
 				91EA5D652C003EF900FA5A55 /* ModifiedJOAListView.swift */,
 				CA01BD922C0149DD0075B9A9 /* JOAPatientView.swift */,
+				CAC3063B2C0175E5009347C7 /* PatientListView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -300,6 +303,7 @@
 				91EA5D5F2C003E0E00FA5A55 /* Choice.swift in Sources */,
 				91EA5D662C003EF900FA5A55 /* ModifiedJOAListView.swift in Sources */,
 				91EA5D302C002E0800FA5A55 /* Item.swift in Sources */,
+				CAC3063C2C0175E5009347C7 /* PatientListView.swift in Sources */,
 				91EA5D5C2C003A9400FA5A55 /* ModifiedJOAView.swift in Sources */,
 				91EA5D612C003E2500FA5A55 /* JOAQuestion.swift in Sources */,
 				91EA5D2C2C002E0800FA5A55 /* mJOAApp.swift in Sources */,
