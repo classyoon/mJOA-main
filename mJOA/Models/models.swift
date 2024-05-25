@@ -12,7 +12,7 @@ import SwiftData
     var firstName: String
     var lastName: String
     var mrn: String
-    var mJOA: [ModifiedJOA]? = nil
+    var mJOA: [ModifiedJOA]? = nil//Why circular optional reference?
     init(firstName: String = "", lastName: String = "", mrn: String = "", mJOA: [ModifiedJOA]? = nil) {
         self.firstName = firstName
         self.lastName = lastName
@@ -22,7 +22,7 @@ import SwiftData
 }
 
 @Model class ModifiedJOA {
-    var patient: Patient?
+    var patient: Patient?//Why circular optional reference?
     var timestamp: Date = Date()
     var motorHand: Int?
     var motorLeg: Int?

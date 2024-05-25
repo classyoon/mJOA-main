@@ -7,10 +7,13 @@
 
 import SwiftUI
 import SwiftData
+/*
+ This compiles.
+ */
 
 struct ModifiedJOAListView: View {
     @Environment(\.modelContext) private var modelContext//Where is the model context, in the enviroment. Important. Think of it as in RAM that interfaces to the persistent data store.
-    @Query private var joaList: [ModifiedJOA] //This how you get the data out of swift data. It may look like an array, but its actually an ordered list.
+    var joaList: [ModifiedJOA] //I kept this because I was unsure whether it was key to the achitecture; however, in order for it to be made, it needed to be public.  I would prefer operating off patients though.
     
     var body: some View {
         NavigationStack {
@@ -27,7 +30,7 @@ struct ModifiedJOAListView: View {
                 }.onDelete(perform: deleteItems)
 
             }
-            .navigationTitle("JOAs")
+            .navigationTitle(patientName)
             .toolbar {
                 EditButton()
                 Button(action: {
@@ -45,6 +48,12 @@ struct ModifiedJOAListView: View {
         }
     }
 
+    var patientName: String {
+        if joaList.isEmpty || joaList[0].patient?.firstName == nil {
+            return "No Name Given"
+        }
+        return joaList[0].patient!.firstName//This is messy but it gets a name from the patient in a way to compile.
+    }
     private func deleteItems(offsets: IndexSet) {
         withAnimation {
             for index in offsets {
@@ -59,6 +68,6 @@ struct ModifiedJOAListView: View {
     let container = try! ModelContainer(for: ModifiedJOA.self, configurations: config)
     
     
-    return ModifiedJOAListView()
+    return ModifiedJOAListView(joaList: [ModifiedJOA()])
         .modelContainer(container)
 }
