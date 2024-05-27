@@ -100,8 +100,10 @@ struct PatientListView: View {
                 }.onDelete(perform: { indexSet in
                     deleteItems(offsets: indexSet)
                 })
-            }.navigationTitle("Patients")
+            }
+            .navigationTitle("Patients")
                 .toolbar{
+                    EditButton()
                     Button(action: {
                         addItem()
                     }, label: {

@@ -33,7 +33,7 @@ struct ModifiedJOAListView: View {
                 Button(action: {
                     addItem()
                 }, label: {
-                    Image(systemName: "plus")
+                    Image(systemName: "plus").padding()
                 })
             }
         }
