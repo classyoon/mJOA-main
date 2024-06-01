@@ -86,15 +86,54 @@ struct PatientMJOAListView : View {
 struct PatientListView: View {
     @Environment (\.modelContext) var modelContext
     @Query private var patients : [Patient]
+    
+    func changeInStats(patient : Patient)->String{
+        if let patientMJOAS = patient.mJOA {
+            var listHasStuff = patientMJOAS.count > 0
+            var listTwoStuff = patientMJOAS.count > 1
+            
+            if listTwoStuff {
+                
+                var recent = patientMJOAS[0]
+                var second = patientMJOAS[1]
+                
+                print("zero index : \(recent.scoreText)\n one index : \(second.scoreText)")
+                if recent.scoreText > second.scoreText{
+                    return "Improving"
+                }else if recent.scoreText < second.scoreText{
+                    return "Worsening"
+                }else if recent.scoreText == second.scoreText {
+                    if recent.scoreText == "Not completed"{
+                        return "Please complete"
+                    }
+                    return "Maintaing"
+                }
+            }
+            if listHasStuff {
+            
+                var score = patientMJOAS[0].scoreText
+                
+                return score
+            }else{
+                return "None"
+            }
+        }
+        return "Error Patient Missing MJOA"
+        
+    }
     var body: some View {
         NavigationStack {
             List{
                 ForEach(patients){ patient in
                     NavigationLink {
                         PatientEditView(patient: patient)
-                    } label: {
-                        Text("\(patient.firstName) \(patient.lastName) : \(patient.mrn)")
+                  
+                        
                     }
+                label: {
+                    Text("\(patient.firstName) \(patient.lastName) : \(patient.mrn) : \(changeInStats(patient: patient))")
+                
+                }
                     
                     
                 }.onDelete(perform: { indexSet in
@@ -102,16 +141,17 @@ struct PatientListView: View {
                 })
             }
             .navigationTitle("Patients")
-                .toolbar{
-                    EditButton()
-                    Button(action: {
-                        addItem()
-                    }, label: {
-                        Image(systemName: "plus")
-                    })
-                }
+            .toolbar{
+                EditButton()
+                Button(action: {
+                    addItem()
+                }, label: {
+                    Image(systemName: "plus")
+                })
+            }
         }
     }
+    
     private func addItem() {
         withAnimation {
             let newItem = Patient()
@@ -127,6 +167,7 @@ struct PatientListView: View {
         }
     }
 }
+
 
 #Preview {
     let config = ModelConfiguration(isStoredInMemoryOnly: true)
