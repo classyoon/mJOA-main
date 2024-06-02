@@ -87,35 +87,48 @@ struct PatientListView: View {
     @Environment (\.modelContext) var modelContext
     @Query private var patients : [Patient]
     
+    func compare(_ list : [ModifiedJOA])->String{
+        ///MARK, Risky but should only be used when we are sure there is more than one.
+        let recent = list[0].scoreText
+        let second = list[1].scoreText
+       
+
+        if recent > second {
+            print("Improved")
+            print("recent \(recent)")
+            print("second \(second)")
+            return "Improved"
+        }
+        if recent < second {
+            print("Worsen")
+            print("recent \(recent)")
+            print("second \(second)")
+            return "Worsen"
+        }
+        if recent == second {
+            print("Same")
+            print("recent \(recent)")
+            print("second \(second)")
+            return "Same Score"
+        }
+        return "compare function improperly used"
+    }
+    /**
+     This will only compare the first two elements
+     */
     func changeInStats(patient : Patient)->String{
         if let patientMJOAS = patient.mJOA {
-            var listHasStuff = patientMJOAS.count > 0
-            var listTwoStuff = patientMJOAS.count > 1
-            
-            if listTwoStuff {
-                
-                var recent = patientMJOAS[0]
-                var second = patientMJOAS[1]
-                
-                print("zero index : \(recent.scoreText)\n one index : \(second.scoreText)")
-                if recent.scoreText > second.scoreText{
-                    return "Improving"
-                }else if recent.scoreText < second.scoreText{
-                    return "Worsening"
-                }else if recent.scoreText == second.scoreText {
-                    if recent.scoreText == "Not completed"{
-                        return "Please complete"
-                    }
-                    return "Maintaing"
-                }
+            if patientMJOAS.isEmpty{
+                return "No tests"
             }
-            if listHasStuff {
-            
-                var score = patientMJOAS[0].scoreText
-                
-                return score
-            }else{
-                return "None"
+            if patientMJOAS[patientMJOAS.count-1].scoreText == "Not completed" {
+                return "Waiting"
+            }
+            if patientMJOAS.count == 1 {
+                return patientMJOAS[0].scoreText
+            }
+            if patientMJOAS.count > 1 {
+                return compare(patientMJOAS)
             }
         }
         return "Error Patient Missing MJOA"
