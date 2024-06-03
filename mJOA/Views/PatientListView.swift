@@ -7,7 +7,29 @@
 
 import SwiftUI
 import SwiftData
-
+import PhotosUI
+struct ProfilePicView :View {
+    var person : Patient
+    var picSize : CGFloat
+    
+    var body: some View {
+        if let data = person.imageData, let uiImage = UIImage(data: data){
+            Image(uiImage: uiImage)
+                .resizable()
+                .scaledToFill()
+                .frame(width: picSize, height: picSize)
+                .clipShape(Circle())
+        }
+        else {
+            Image(systemName: "person")
+                .resizable()
+                .scaledToFill()
+                .frame(width: picSize, height: picSize)
+                .clipShape(Circle())
+        }
+    }
+    
+}
 extension Patient {
     static let examples : [Patient] = [Patient(firstName: "Jo", lastName: "Mama", mrn: "123"), Patient(firstName: "Mary", lastName: "Poppins", mrn: "987")]
     var fullName : String {
@@ -16,25 +38,54 @@ extension Patient {
 }
 struct PatientEditView : View {
     @Bindable var patient : Patient
+    @State private var sourceType : SourceType?
+    @State private var photosPickerItem : PhotosPickerItem?
+    @State private var profileImage : Image?
     
     var body: some View {
         Form {
-            TextField("First name", text: $patient.firstName)
-            TextField("Last name", text: $patient.lastName)
-            TextField("MRN", text: $patient.mrn)
-            NavigationLink {
-                PatientMJOAListView(patient: patient)
-            } label: {
-                Text("MJOA List")
+            HStack{
+                PhotosPicker("Select avatar", selection: $photosPickerItem, matching: .images)
+                
+                ProfilePicView(person: patient, picSize: 200)
+                TextField("First name", text: $patient.firstName)
+                TextField("Last name", text: $patient.lastName)
+                TextField("MRN", text: $patient.mrn)
+                NavigationLink {
+                    MJOAListView(patient: patient, forPatientOnly: true)
+                } label: {
+                    Text("MJOA List")
+                }
+                Button {
+                    sourceType = .camera
+                } label: {
+                    Image(systemName: "camera.fill")
+                }
+                
+                
+            } .onChange(of: photosPickerItem) {
+                Task {
+                    if let data = try? await photosPickerItem?.loadTransferable(type: Data.self) {
+                        if let uiImage = UIImage(data: data) {
+                            profileImage = Image(uiImage: uiImage)
+                            patient.imageData = data
+                        }
+                    } else {
+                        print("Failed")
+                    }
+                }
             }
-            
+            .sheet(item: $sourceType) { sourceType in
+                CameraView(sourceType: sourceType, imageData: $patient.imageData)
+            }
         }
     }
 }
-struct PatientMJOAListView : View {
+struct MJOAListView : View {
     @Environment (\.modelContext) var modelContext
     @Query private var mJOAs : [ModifiedJOA]
     let patient : Patient
+    var forPatientOnly : Bool
     var filteredList : [ModifiedJOA] {
         return mJOAs.filter { mjoa in
             mjoa.patient == patient
@@ -43,7 +94,7 @@ struct PatientMJOAListView : View {
     var body: some View {
         
         List {
-            ForEach(filteredList) { joa in
+            ForEach(forPatientOnly ?  filteredList : mJOAs) { joa in
                 NavigationLink {
                     ModifiedJOAView(mJOA: joa)
                 } label: {
@@ -91,8 +142,8 @@ struct PatientListView: View {
         ///MARK, Risky but should only be used when we are sure there is more than one.
         let recent = list[0].scoreText
         let second = list[1].scoreText
-       
-
+        
+        
         if recent > second {
             print("Improved")
             print("recent \(recent)")
@@ -140,12 +191,17 @@ struct PatientListView: View {
                 ForEach(patients){ patient in
                     NavigationLink {
                         PatientEditView(patient: patient)
-                  
+                        
                         
                     }
                 label: {
-                    Text("\(patient.firstName) \(patient.lastName) : \(patient.mrn) : \(changeInStats(patient: patient))")
-                
+                    HStack{
+                        Text("\(patient.firstName) \(patient.lastName) : \(patient.mrn) : \(changeInStats(patient: patient))")
+                        ProfilePicView(person: patient, picSize: 50)
+                        
+                    }
+                    
+                    
                 }
                     
                     
