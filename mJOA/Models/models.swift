@@ -7,12 +7,14 @@
 
 import Foundation
 import SwiftData
+import PhotosUI
 
 @Model class Patient {
     var firstName: String
     var lastName: String
     var mrn: String
     var mJOA: [ModifiedJOA]? = nil
+    @Attribute(.externalStorage) var imageData : Data?
     init(firstName: String = "", lastName: String = "", mrn: String = "", mJOA: [ModifiedJOA]? = nil) {
         self.firstName = firstName
         self.lastName = lastName

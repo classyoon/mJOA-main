@@ -35,6 +35,7 @@ struct ModifiedJOAView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
+            Text(mJOA.patient?.fullName ?? "Unknown")
             Group{
                 Text("Score: \(scoreText)")
                     .font(.title)

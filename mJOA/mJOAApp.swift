@@ -25,7 +25,7 @@ struct mJOAApp: App {
 
     var body: some Scene {
         WindowGroup {
-            PatientListView()
+            MainView()
         }
         .modelContainer(sharedModelContainer)
     }
