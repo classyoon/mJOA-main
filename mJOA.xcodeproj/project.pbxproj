@@ -22,6 +22,8 @@
 		CA92F1DD2C03F83F00FFF3D7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CA92F1DC2C03F83F00FFF3D7 /* Assets.xcassets */; };
 		CAAA4F052C0D540B008AA2B8 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAA4F042C0D540B008AA2B8 /* MainView.swift */; };
 		CAAA4F072C0D5694008AA2B8 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAA4F062C0D5694008AA2B8 /* CameraView.swift */; };
+		CAAA4F482C0FCCC3008AA2B8 /* ProfilePicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAA4F472C0FCCC3008AA2B8 /* ProfilePicView.swift */; };
+		CAAA4F4A2C0FCD17008AA2B8 /* PatientEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAA4F492C0FCD17008AA2B8 /* PatientEditView.swift */; };
 		CAC3063C2C0175E5009347C7 /* PatientListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC3063B2C0175E5009347C7 /* PatientListView.swift */; };
 /* End PBXBuildFile section */
 
@@ -61,6 +63,8 @@
 		CA92F1DC2C03F83F00FFF3D7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CAAA4F042C0D540B008AA2B8 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		CAAA4F062C0D5694008AA2B8 /* CameraView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
+		CAAA4F472C0FCCC3008AA2B8 /* ProfilePicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePicView.swift; sourceTree = "<group>"; };
+		CAAA4F492C0FCD17008AA2B8 /* PatientEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientEditView.swift; sourceTree = "<group>"; };
 		CAC3063B2C0175E5009347C7 /* PatientListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -164,6 +168,8 @@
 				91EA5D5B2C003A9400FA5A55 /* ModifiedJOAView.swift */,
 				91EA5D652C003EF900FA5A55 /* ModifiedJOAListView.swift */,
 				CAC3063B2C0175E5009347C7 /* PatientListView.swift */,
+				CAAA4F492C0FCD17008AA2B8 /* PatientEditView.swift */,
+				CAAA4F472C0FCCC3008AA2B8 /* ProfilePicView.swift */,
 				CAAA4F042C0D540B008AA2B8 /* MainView.swift */,
 				CAAA4F062C0D5694008AA2B8 /* CameraView.swift */,
 			);
@@ -310,7 +316,9 @@
 				CAAA4F072C0D5694008AA2B8 /* CameraView.swift in Sources */,
 				91EA5D5C2C003A9400FA5A55 /* ModifiedJOAView.swift in Sources */,
 				91EA5D612C003E2500FA5A55 /* JOAQuestion.swift in Sources */,
+				CAAA4F4A2C0FCD17008AA2B8 /* PatientEditView.swift in Sources */,
 				91EA5D2C2C002E0800FA5A55 /* mJOAApp.swift in Sources */,
+				CAAA4F482C0FCCC3008AA2B8 /* ProfilePicView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
