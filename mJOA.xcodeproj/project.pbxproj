@@ -167,13 +167,21 @@
 				91EA5D592C00363A00FA5A55 /* JOAQuestionView.swift */,
 				91EA5D5B2C003A9400FA5A55 /* ModifiedJOAView.swift */,
 				91EA5D652C003EF900FA5A55 /* ModifiedJOAListView.swift */,
-				CAC3063B2C0175E5009347C7 /* PatientListView.swift */,
-				CAAA4F492C0FCD17008AA2B8 /* PatientEditView.swift */,
-				CAAA4F472C0FCCC3008AA2B8 /* ProfilePicView.swift */,
+				CAAA4F4B2C0FCDC1008AA2B8 /* Patient */,
 				CAAA4F042C0D540B008AA2B8 /* MainView.swift */,
 				CAAA4F062C0D5694008AA2B8 /* CameraView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		CAAA4F4B2C0FCDC1008AA2B8 /* Patient */ = {
+			isa = PBXGroup;
+			children = (
+				CAAA4F472C0FCCC3008AA2B8 /* ProfilePicView.swift */,
+				CAC3063B2C0175E5009347C7 /* PatientListView.swift */,
+				CAAA4F492C0FCD17008AA2B8 /* PatientEditView.swift */,
+			);
+			path = Patient;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

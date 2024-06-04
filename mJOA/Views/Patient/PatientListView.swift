@@ -30,6 +30,7 @@ struct MJOAListView : View {
     var body: some View {
         
         List {
+            Text("PATIEBT VERSUIB")
             ForEach(forPatientOnly ?  filteredList : mJOAs) { joa in
                 NavigationLink {
                     ModifiedJOAView(mJOA: joa)
