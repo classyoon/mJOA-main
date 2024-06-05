@@ -24,6 +24,9 @@
 		CAAA4F072C0D5694008AA2B8 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAA4F062C0D5694008AA2B8 /* CameraView.swift */; };
 		CAAA4F482C0FCCC3008AA2B8 /* ProfilePicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAA4F472C0FCCC3008AA2B8 /* ProfilePicView.swift */; };
 		CAAA4F4A2C0FCD17008AA2B8 /* PatientEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAA4F492C0FCD17008AA2B8 /* PatientEditView.swift */; };
+		CAAA4F4D2C0FCF9B008AA2B8 /* PatientMjoaListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAA4F4C2C0FCF9B008AA2B8 /* PatientMjoaListView.swift */; };
+		CAAA4F4F2C0FD537008AA2B8 /* MJOAItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAA4F4E2C0FD537008AA2B8 /* MJOAItemView.swift */; };
+		CAAA4F512C0FD607008AA2B8 /* PatientItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAA4F502C0FD607008AA2B8 /* PatientItemView.swift */; };
 		CAC3063C2C0175E5009347C7 /* PatientListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC3063B2C0175E5009347C7 /* PatientListView.swift */; };
 /* End PBXBuildFile section */
 
@@ -65,6 +68,9 @@
 		CAAA4F062C0D5694008AA2B8 /* CameraView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
 		CAAA4F472C0FCCC3008AA2B8 /* ProfilePicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePicView.swift; sourceTree = "<group>"; };
 		CAAA4F492C0FCD17008AA2B8 /* PatientEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientEditView.swift; sourceTree = "<group>"; };
+		CAAA4F4C2C0FCF9B008AA2B8 /* PatientMjoaListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientMjoaListView.swift; sourceTree = "<group>"; };
+		CAAA4F4E2C0FD537008AA2B8 /* MJOAItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MJOAItemView.swift; sourceTree = "<group>"; };
+		CAAA4F502C0FD607008AA2B8 /* PatientItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientItemView.swift; sourceTree = "<group>"; };
 		CAC3063B2C0175E5009347C7 /* PatientListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -167,6 +173,8 @@
 				91EA5D592C00363A00FA5A55 /* JOAQuestionView.swift */,
 				91EA5D5B2C003A9400FA5A55 /* ModifiedJOAView.swift */,
 				91EA5D652C003EF900FA5A55 /* ModifiedJOAListView.swift */,
+				CAAA4F4E2C0FD537008AA2B8 /* MJOAItemView.swift */,
+				CAAA4F4C2C0FCF9B008AA2B8 /* PatientMjoaListView.swift */,
 				CAAA4F4B2C0FCDC1008AA2B8 /* Patient */,
 				CAAA4F042C0D540B008AA2B8 /* MainView.swift */,
 				CAAA4F062C0D5694008AA2B8 /* CameraView.swift */,
@@ -179,6 +187,7 @@
 			children = (
 				CAAA4F472C0FCCC3008AA2B8 /* ProfilePicView.swift */,
 				CAC3063B2C0175E5009347C7 /* PatientListView.swift */,
+				CAAA4F502C0FD607008AA2B8 /* PatientItemView.swift */,
 				CAAA4F492C0FCD17008AA2B8 /* PatientEditView.swift */,
 			);
 			path = Patient;
@@ -315,6 +324,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				91EA5D632C003E4400FA5A55 /* models.swift in Sources */,
+				CAAA4F4D2C0FCF9B008AA2B8 /* PatientMjoaListView.swift in Sources */,
 				91EA5D5A2C00363A00FA5A55 /* JOAQuestionView.swift in Sources */,
 				91EA5D5F2C003E0E00FA5A55 /* Choice.swift in Sources */,
 				CAAA4F052C0D540B008AA2B8 /* MainView.swift in Sources */,
@@ -327,6 +337,8 @@
 				CAAA4F4A2C0FCD17008AA2B8 /* PatientEditView.swift in Sources */,
 				91EA5D2C2C002E0800FA5A55 /* mJOAApp.swift in Sources */,
 				CAAA4F482C0FCCC3008AA2B8 /* ProfilePicView.swift in Sources */,
+				CAAA4F4F2C0FD537008AA2B8 /* MJOAItemView.swift in Sources */,
+				CAAA4F512C0FD607008AA2B8 /* PatientItemView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

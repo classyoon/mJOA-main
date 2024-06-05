@@ -9,7 +9,7 @@ import Foundation
 import SwiftData
 import PhotosUI
 
-@Model class Patient {
+@Model class Patient : Hashable {
     var firstName: String
     var lastName: String
     var mrn: String

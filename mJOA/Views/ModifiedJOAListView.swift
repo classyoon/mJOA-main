@@ -16,14 +16,7 @@ struct ModifiedJOAListView: View {
         NavigationStack {
             List {
                 ForEach(joaList) { joa in
-                    NavigationLink {
-                        ModifiedJOAView(mJOA: joa)
-                    } label: {
-                        VStack {
-                            Text("\(joa.timestamp)")
-                            Text("\(joa.scoreText)")
-                        }
-                    }
+                    MJOAItemView(joa: joa)
                 }.onDelete(perform: deleteItems)
 
             }
@@ -53,6 +46,9 @@ struct ModifiedJOAListView: View {
         }
     }
 }
+
+
+
 
 #Preview {
     let config = ModelConfiguration(isStoredInMemoryOnly: true)

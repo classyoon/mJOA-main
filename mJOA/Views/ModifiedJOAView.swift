@@ -32,10 +32,20 @@ enum Status {
 }
 struct ModifiedJOAView: View {
     @Bindable var mJOA: ModifiedJOA
-    
+    @Query private var patients : [Patient]
     var body: some View {
         VStack(alignment: .leading) {
             Text(mJOA.patient?.fullName ?? "Unknown")
+            Picker("Answers", selection: $mJOA.patient) {
+                ForEach(patients, id: \.self) { choice in
+                    Button(action: {
+                       // mJOA = ModifiedJOA(patient: choice)
+                    }, label: {
+                        Text(choice.fullName)
+                    })
+                    
+                }
+            }
             Group{
                 Text("Score: \(scoreText)")
                     .font(.title)
@@ -50,7 +60,9 @@ struct ModifiedJOAView: View {
             }.padding().background(.yellow.opacity(0.8))
         }
         .padding()
+        
         .background(.blue.opacity(0.5))
+        
         
     }
     

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 import PhotosUI
 struct PatientEditView : View {
     @Bindable var patient : Patient
@@ -16,25 +17,39 @@ struct PatientEditView : View {
     
     var body: some View {
         
-        Form {
-            PhotosPicker("Select avatar", selection: $photosPickerItem, matching: .images)
+        Form{
+            HStack{
+                Button(action: {
+                    sourceType = .photoLibrary
+                }, label: {
+                    ProfilePicView(person: patient, picSize: 200)
+                }).buttonStyle(PlainButtonStyle())
+                VStack(spacing:10){
+                    Button {
+                        sourceType = .camera
+                    } label: {
+                        Image(systemName: "camera.fill").resizable().frame(width: 50, height: 50)
+                    }.buttonStyle(PlainButtonStyle())
+                    PhotosPicker("Choose Photo", selection: $photosPickerItem, matching: .images)
+                }
+            }
+           
             
             ProfilePicView(person: patient, picSize: 200)
+                .onTapGesture {
+                    sourceType = .photoLibrary
+                }
             TextField("First name", text: $patient.firstName)
             TextField("Last name", text: $patient.lastName)
             TextField("MRN", text: $patient.mrn)
             NavigationLink {
                 
-                MJOAListView(patient: patient, forPatientOnly: true)
+                PatientMjoaListView(patient: patient, forPatientOnly: true)
                 
             } label: {
                 Text("MJOA List")
             }
-            Button {
-                sourceType = .camera
-            } label: {
-                Image(systemName: "camera.fill")
-            }
+           
             
             
         }
@@ -56,10 +71,14 @@ struct PatientEditView : View {
             }
         
         
-        
     }
 }
 
 #Preview {
-    PatientEditView(patient: Patient.examples[0])
+    let config = ModelConfiguration(isStoredInMemoryOnly: true)
+    let container = try! ModelContainer(for: Patient.self, configurations: config)
+    Patient.examples.forEach { patient in
+        container.mainContext.insert(patient)
+    }
+    return PatientEditView(patient: Patient.examples[0]).modelContainer(container)
 }
