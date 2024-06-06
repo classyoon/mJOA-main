@@ -23,7 +23,7 @@ struct PatientMjoaListView : View {
             ForEach(forPatientOnly ?  filteredList : mJOAs) { joa in
                 MJOAItemView(joa: joa)
                 
-            }.onDelete(perform: deleteItems)
+            }.onDelete(perform: deleteItems).sensoryFeedback(.decrease, trigger: mJOAs)
         }
         .navigationTitle(patient.fullName)
         .toolbar {
@@ -32,7 +32,7 @@ struct PatientMjoaListView : View {
                 addItem()
             }, label: {
                 Image(systemName: "plus")
-            })
+            }).sensoryFeedback(.increase, trigger: mJOAs)
         }
     }
     private func addItem() {

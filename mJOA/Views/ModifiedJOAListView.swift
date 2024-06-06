@@ -17,7 +17,7 @@ struct ModifiedJOAListView: View {
             List {
                 ForEach(joaList) { joa in
                     MJOAItemView(joa: joa)
-                }.onDelete(perform: deleteItems)
+                }.onDelete(perform: deleteItems).sensoryFeedback(.decrease, trigger: joaList)
 
             }
             .navigationTitle("JOAs")
@@ -27,7 +27,7 @@ struct ModifiedJOAListView: View {
                     addItem()
                 }, label: {
                     Image(systemName: "plus").padding()
-                })
+                }).sensoryFeedback(.increase, trigger: joaList)
             }
         }
     }

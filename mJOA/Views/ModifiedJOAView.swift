@@ -53,10 +53,10 @@ struct ModifiedJOAView: View {
                 DatePicker("Date", selection: $mJOA.timestamp, displayedComponents: [.date])
             }.padding()
             Group{
-                JOAQuestionView(value: $mJOA.motorHand, question: JOAQuestion.motorHand)
-                JOAQuestionView(value: $mJOA.motorLeg, question: JOAQuestion.motorLeg)
-                JOAQuestionView(value: $mJOA.sensation, question: JOAQuestion.sensation)
-                JOAQuestionView(value: $mJOA.sphincter, question: JOAQuestion.sphincter)
+                JOAQuestionView(value: $mJOA.motorHand, question: JOAQuestion.motorHand).sensoryFeedback(.levelChange, trigger: mJOA)
+                JOAQuestionView(value: $mJOA.motorLeg, question: JOAQuestion.motorLeg).sensoryFeedback(.levelChange, trigger: mJOA)
+                JOAQuestionView(value: $mJOA.sensation, question: JOAQuestion.sensation).sensoryFeedback(.levelChange, trigger: mJOA)
+                JOAQuestionView(value: $mJOA.sphincter, question: JOAQuestion.sphincter).sensoryFeedback(.levelChange, trigger: mJOA)
             }.padding().background(.yellow.opacity(0.8))
         }
         .padding()
