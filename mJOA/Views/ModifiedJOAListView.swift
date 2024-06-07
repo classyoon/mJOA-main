@@ -20,7 +20,7 @@ struct ModifiedJOAListView: View {
                 }.onDelete(perform: deleteItems).sensoryFeedback(.decrease, trigger: joaList)
 
             }
-            .navigationTitle("JOAs")
+            .navigationTitle("All JOAs")
             .toolbar {
                 EditButton()
                 Button(action: {
