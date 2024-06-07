@@ -17,16 +17,15 @@ struct PatientEditView : View {
     
     var body: some View {
         VStack{
-            Button {
-                editMode.toggle()
-            } label: {
-                Text("Edit")
-            }
-
-            Form{
-                HStack{
-                    
-                    ProfilePicView(person: patient, picSize: 200)
+            HStack{
+                
+                ProfilePicView(person: patient, picSize: 200)
+                VStack{
+                    Button {
+                        editMode.toggle()
+                    } label: {
+                        Text("Edit")
+                    }.buttonBorderShape(.automatic)
                     if editMode == true {
                         VStack(spacing:10){
                             Button {
@@ -37,30 +36,27 @@ struct PatientEditView : View {
                             PhotosPicker("Choose Photo", selection: $photosPickerItem, matching: .images)
                         }
                     }
-                }
-                
-                
-                if editMode == true {
-                    Group{
-                        TextField("First name", text: $patient.firstName)
-                        TextField("Last name", text: $patient.lastName)
-                        TextField("MRN", text: $patient.mrn)
-                    }
-                } else{
-                    Text("\(patient.firstName) \(patient.lastName)").font(.title)
-                    Text("MRN : \(patient.mrn)").font(.title)
-                }
-                NavigationLink {
                     
-                    PatientMjoaListView(patient: patient, forPatientOnly: true)
-                    
-                } label: {
-                    Text("MJOA List")
                 }
-                
-                
-                
             }
+            
+            
+            if editMode == true {
+                VStack{
+                    TextField("First name", text: $patient.firstName)
+                    TextField("Last name", text: $patient.lastName)
+                    TextField("MRN", text: $patient.mrn)
+                }.padding()
+            } else{
+               // Text("\(patient.firstName) \(patient.lastName)").font(.title)
+                Text("MRN : \(patient.mrn)").font(.title)
+            }
+        }
+                
+                
+                
+                
+            
             .onChange(of: photosPickerItem) {
                 Task {
                     if let data = try? await photosPickerItem?.loadTransferable(type: Data.self) {
@@ -77,10 +73,12 @@ struct PatientEditView : View {
                 .sheet(item: $sourceType) { sourceType in
                     CameraView(sourceType: sourceType, imageData: $patient.imageData)
                 }
-            
+            PatientMjoaListView(patient: patient, forPatientOnly: true)
+            .background(Color.blue)
         }
+    
     }
-}
+
 #Preview {
     let config = ModelConfiguration(isStoredInMemoryOnly: true)
     let container = try! ModelContainer(for: Patient.self, configurations: config)
