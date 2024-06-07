@@ -13,67 +13,74 @@ struct PatientEditView : View {
     @State private var sourceType : SourceType?
     @State private var photosPickerItem : PhotosPickerItem?
     @State private var profileImage : Image?
-    
+    @State private var editMode : Bool = false
     
     var body: some View {
-        
-        Form{
-            HStack{
-                Button(action: {
-                    sourceType = .photoLibrary
-                }, label: {
-                    ProfilePicView(person: patient, picSize: 200)
-                }).buttonStyle(PlainButtonStyle())
-                VStack(spacing:10){
-                    Button {
-                        sourceType = .camera
-                    } label: {
-                        Image(systemName: "camera.fill").resizable().frame(width: 50, height: 50)
-                    }.buttonStyle(PlainButtonStyle())
-                    PhotosPicker("Choose Photo", selection: $photosPickerItem, matching: .images)
-                }
-            }
-           
-            
-            ProfilePicView(person: patient, picSize: 200)
-                .onTapGesture {
-                    sourceType = .photoLibrary
-                }
-            TextField("First name", text: $patient.firstName)
-            TextField("Last name", text: $patient.lastName)
-            TextField("MRN", text: $patient.mrn)
-            NavigationLink {
-                
-                PatientMjoaListView(patient: patient, forPatientOnly: true)
-                
+        VStack{
+            Button {
+                editMode.toggle()
             } label: {
-                Text("MJOA List")
+                Text("Edit")
             }
-           
-            
+
+            Form{
+                HStack{
+                    
+                    ProfilePicView(person: patient, picSize: 200)
+                    if editMode == true {
+                        VStack(spacing:10){
+                            Button {
+                                sourceType = .camera
+                            } label: {
+                                Image(systemName: "camera.fill").resizable().frame(width: 50, height: 50)
+                            }.buttonStyle(PlainButtonStyle())
+                            PhotosPicker("Choose Photo", selection: $photosPickerItem, matching: .images)
+                        }
+                    }
+                }
+                
+                
+                if editMode == true {
+                    Group{
+                        TextField("First name", text: $patient.firstName)
+                        TextField("Last name", text: $patient.lastName)
+                        TextField("MRN", text: $patient.mrn)
+                    }
+                } else{
+                    Text("\(patient.firstName) \(patient.lastName)").font(.title)
+                    Text("MRN : \(patient.mrn)").font(.title)
+                }
+                NavigationLink {
+                    
+                    PatientMjoaListView(patient: patient, forPatientOnly: true)
+                    
+                } label: {
+                    Text("MJOA List")
+                }
+                
+                
+                
+            }
+            .onChange(of: photosPickerItem) {
+                Task {
+                    if let data = try? await photosPickerItem?.loadTransferable(type: Data.self) {
+                        if let uiImage = UIImage(data: data) {
+                            profileImage = Image(uiImage: uiImage)
+                            patient.imageData = data
+                            
+                        }
+                    } else {
+                        print("Failed")
+                    }
+                }
+            }.sensoryFeedback(.levelChange, trigger: patient.imageData)
+                .sheet(item: $sourceType) { sourceType in
+                    CameraView(sourceType: sourceType, imageData: $patient.imageData)
+                }
             
         }
-        .onChange(of: photosPickerItem) {
-            Task {
-                if let data = try? await photosPickerItem?.loadTransferable(type: Data.self) {
-                    if let uiImage = UIImage(data: data) {
-                        profileImage = Image(uiImage: uiImage)
-                        patient.imageData = data
-                        
-                    }
-                } else {
-                    print("Failed")
-                }
-            }
-        }.sensoryFeedback(.levelChange, trigger: patient.imageData)
-            .sheet(item: $sourceType) { sourceType in
-                CameraView(sourceType: sourceType, imageData: $patient.imageData)
-            }
-        
-        
     }
 }
-
 #Preview {
     let config = ModelConfiguration(isStoredInMemoryOnly: true)
     let container = try! ModelContainer(for: Patient.self, configurations: config)
