@@ -36,14 +36,13 @@ struct ModifiedJOAView: View {
     var body: some View {
         VStack(alignment: .leading) {
             Text(mJOA.patient?.fullName ?? "Unknown")
-            Picker("Answers", selection: $mJOA.patient) {
-                ForEach(patients, id: \.self) { choice in
-                    Button(action: {
-                       // mJOA = ModifiedJOA(patient: choice)
-                    }, label: {
-                        Text(choice.fullName)
-                    })
-                    
+            if patients.count == 0 {
+                Text("Create a patient please")
+            }
+            Picker("", selection: $mJOA.patient) {
+                ForEach(patients, id: \.self) { patient in
+                 
+                    Text(patient.fullName).tag(patient as Patient?)
                 }
             }
             Group{
